@@ -1,0 +1,79 @@
+source "./colors.sh"
+source "./icons.sh"
+
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+sketchybar --bar color=0x00000000 height=40 margin=0 y_offset=3 padding_left=8 padding_right=8 sticky=on
+sketchybar --default padding_left=8 padding_right=5                    \
+                     background.border_color=$COLOR_YELLOW             \
+                     background.border_width=2                         \
+                     background.height=40                              \
+                     background.corner_radius=12                       \
+                     icon.color=$COLOR_YELLOW                          \
+                     icon.highlight_color=$COLOR_BACKGROUND            \
+                     icon.padding_left=6 icon.padding_right=2          \
+                     icon.font="Nerd Font:Regular:16.0"                \
+                     label.color=$COLOR_YELLOW                         \
+                     label.highlight_color=$COLOR_BACKGROUND           \
+                     label.padding_left=2 label.padding_right=6        \
+                     label.font="Nerd Font:Bold:12.0"
+
+sketchybar --add event window_change \
+           --add event window_focus \
+           --add event title_change
+
+sketchybar --add item logo left --set logo background.border_width=0 background.height=24 icon=$ICON_APPLE click_script="./bin/menus -s 0" --subscribe logo mouse.clicked
+sketchybar --add bracket apple logo --set apple background.color=$COLOR_BACKGROUND background.border_color=$COLOR_RED
+sketchybar --add item seperator.r0 left --set seperator.r0 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+sketchybar --add item title left --set title script="$PLUGIN_DIR/title.sh" update_freq=5 padding_left=2 padding_right=8 background.border_width=0 background.height=24 click_script="./bin/menus -s 1" --subscribe title mouse.clicked window_focus front_app_switched space_change title_change
+sketchybar --add bracket window title --set window background.color=$COLOR_BACKGROUND background.border_color=$COLOR_RED
+sketchybar --add item seperator.r1 left --set seperator.r1 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
+COLORS_SPACE=($COLOR_YELLOW $COLOR_CYAN $COLOR_MAGENTA $COLOR_WHITE $COLOR_BLUE $COLOR_RED $COLOR_GREEN)
+LENGTH=${#ICONS_SPACE[@]}
+for i in "${!ICONS_SPACE[@]}"
+do
+  sid=$((i+1))
+  PAD_LEFT=2
+  PAD_RIGHT=8
+  if [[ $i == 0 ]]; then
+    PAD_LEFT=8
+  elif [[ $i == $((LENGTH-1)) ]]; then
+    PAD_RIGHT=0
+  fi
+  sketchybar --add space space.$sid left --set space.$sid script="$PLUGIN_DIR/app_space.sh" associated_space=$sid padding_left=$PAD_LEFT padding_right=$PAD_RIGHT background.color="$COLOR_WHITE" background.border_width=0 background.corner_radius=6 background.height=24 icon="${ICONS_SPACE[$i]}" --subscribe space.$sid front_app_switched window_change
+done
+sketchybar --add bracket spaces '/space\..*/' --set spaces background.color=$COLOR_BACKGROUND
+
+media=(
+  script="$PLUGIN_DIR/media.sh"
+  updates=on
+)
+
+sketchybar --add item media left --set media script="$PLUGIN_DIR/media.sh" updates=on --subscribe media media_change
+sketchybar --add item seperator.r2 left --set seperator.r2 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
+sketchybar --add item yabai_mode left --set yabai_mode padding_left=3 padding_right=10 update_freq=5 script="$PLUGIN_DIR/yabai.sh" click_script="$PLUGIN_DIR/yabai_click.sh" --subscribe yabai_mode mouse.clicked window_focus front_app_switched space_change title_change \
+           --add bracket yabai yabai_mode --set yabai background.color=$COLOR_BACKGROUND background.border_color=$COLOR_RED
+
+sketchybar --add item time right --set time script="$PLUGIN_DIR/time.sh" update_freq=5 padding_left=2 padding_right=8 background.color=$COLOR_RED background.border_width=0 background.corner_radius=6 background.height=24 icon=$ICON_CLOCK icon.highlight=on label.highlight=on \
+           --add item date right --set date script="$PLUGIN_DIR/date.sh" update_freq=60 padding_left=8 padding_right=2 background.height=24 icon=$ICON_CALENDAR \
+           --add bracket clock time date --set clock background.color=$COLOR_BACKGROUND background.border_color=$COLOR_RED \
+           --add item seperator.r3 right --set seperator.r3 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
+sketchybar --add item wifi right --set wifi script="$PLUGIN_DIR/wifi.sh" update_freq=5 padding_left=2 padding_right=8 background.border_width=0 background.corner_radius=6 background.height=24 icon.highlight=on label.highlight=on --subscribe wifi wifi_change \
+           --add item volume right --set volume script="$PLUGIN_DIR/volume.sh" padding_left=2 padding_right=2 background.border_width=0 background.height=24 --subscribe volume volume_change \
+           --add item battery right --set battery script="$PLUGIN_DIR/battery.sh" update_freq=120 padding_left=8 padding_right=2 background.border_width=0 background.height=24 --subscribe battery system_woke power_source_change \
+           --add bracket status wifi volume battery --set status background.color=$COLOR_BACKGROUND background.border_color=$COLOR_BLUE \
+           --add item seperator.r4 right --set seperator.r4 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
+sketchybar --add item ram right --set ram script="$PLUGIN_DIR/ram.sh" update_freq=5 padding_left=2 padding_right=8 background.border_width=0 background.height=24 \
+           --add item cpu right --set cpu script="$PLUGIN_DIR/cpu.sh" update_freq=5 padding_left=8 padding_right=2 background.border_width=0 background.height=24 \
+           --add bracket activity ram cpu --set activity background.color=$COLOR_BACKGROUND background.border_color=$COLOR_MAGENTA \
+           --add item seperator.r5 right --set seperator.r5 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
+sketchybar --add item pip right --set pip icon="󰌠 " label=" 0" script="$PLUGIN_DIR/update.sh" update_freq=60 padding_left=2 padding_right=8 background.border_width=0 background.height=24 \
+           --add item brew right --set brew icon="􀐛 " label=" 0" padding_left=8 padding_right=2 background.border_width=0 background.height=24 \
+           --add bracket updates pip brew --set updates background.color=$COLOR_BACKGROUND background.border_color=$COLOR_MAGENTA \
+           --add item seperator.r6 right --set seperator.r6 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
+sketchybar --update
