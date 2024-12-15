@@ -1,0 +1,25 @@
+#!/bin/sh
+
+export COLOR_BACKGROUND=0xe01d2021
+export COLOR_FOREGROUND=0xe0fbf1c7
+
+export COLOR_ACCENT=0xe0d65d0e
+export COLOR_ACCENT_BRIGHT=0xe0fe8019
+
+export COLOR_BLACK=0xbf000000
+export COLOR_RED=0xffdddddd
+export COLOR_GREEN=0xffdddddd
+export COLOR_YELLOW=0xffdddddd
+export COLOR_BLUE=0xffdddddd
+export COLOR_MAGENTA=0xffdddddd
+export COLOR_CYAN=0xffdddddd
+export COLOR_WHITE=0xffdddddd
+
+export COLOR_BLACK_BRIGHT=0xff000000
+export COLOR_RED_BRIGHT=0xfff6f6f6
+export COLOR_GREEN_BRIGHT=0xfff6f6f6
+export COLOR_YELLOW_BRIGHT=0xfff6f6f6
+export COLOR_BLUE_BRIGHT=0xfff6f6f6
+export COLOR_MAGENTA_BRIGHT=0xfff6f6f6
+export COLOR_CYAN_BRIGHT=0xfff6f6f6
+export COLOR_WHITE_BRIGHT=0xffffffff
