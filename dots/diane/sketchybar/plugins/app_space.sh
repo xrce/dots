@@ -24,7 +24,7 @@ do
         while IFS= read -r line; do APPS_ARR+=("$line"); done <<< "$APPS"
         TITLES_ARR=()
         while IFS= read -r line; do TITLES_ARR+=("$line"); done <<< "$TITLES"
-    
+
         LENGTH=${#APPS_ARR[@]}
         for j in "${!APPS_ARR[@]}"
         do

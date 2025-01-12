@@ -21,10 +21,10 @@ sketchybar --add event window_change \
            --add event window_focus \
            --add event title_change
 
-sketchybar --add item logo left --set logo script="$PLUGIN_DIR/logo.sh" update_freq=1 background.border_width=0 background.height=24 icon=$ICON_APPLE window_focus front_app_switched space_change title_change
+sketchybar --add item logo left --set logo script="$PLUGIN_DIR/logo.sh" background.border_width=0 background.height=24 icon=$ICON_APPLE click_script="./bin/menus -s 0" --subscribe logo mouse.clicked window_focus front_app_switched space_change title_change
 sketchybar --add bracket apple logo --set apple background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT
 sketchybar --add item seperator.r0 left --set seperator.r0 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
-sketchybar --add item title left --set title script="$PLUGIN_DIR/title.sh" update_freq=1 padding_left=2 padding_right=8 background.border_width=0 background.height=24 window_focus front_app_switched space_change title_change
+sketchybar --add item title left --set title script="$PLUGIN_DIR/title.sh" padding_left=2 padding_right=8 background.border_width=0 background.height=24 click_script="./bin/menus -s 1" --subscribe title window_focus front_app_switched space_change title_change
 sketchybar --add bracket window title --set window background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT
 sketchybar --add item seperator.r1 left --set seperator.r1 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
 
@@ -44,20 +44,29 @@ do
 done
 sketchybar --add bracket spaces '/space\..*/' --set spaces background.color=$COLOR_BACKGROUND
 
-media=(
-  script="$PLUGIN_DIR/media.sh"
-  updates=on
-)
+sketchybar --add item centre right --set centre icon.color=$COLOR_DEFAULT background.color=$COLOR_BACKGROUND icon=$ICON_CMD padding_left=6 padding_right=4 icon.padding_left=8 icon.padding_right=0 background.border_width=0 background.corner_radius=6 background.height=24 click_script="osascript -e 'tell application \"System Events\" to click menu bar item 2 of menu bar 1 of application process \"ControlCenter\"'" \
+           --add bracket control centre --set control background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
+           --add item seperator.r2 right --set seperator.r2 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
 sketchybar --add item microphone right --set microphone script="$PLUGIN_DIR/microphone.sh" update_freq=1 padding_left=4 padding_right=8 icon.padding_left=8 icon.padding_right=0 background.border_width=0 background.corner_radius=6 background.height=24 \
            --add item screenrec right --set screenrec script="$PLUGIN_DIR/screenrec.sh" update_freq=1 padding_left=8 padding_right=4 icon.padding_left=8 icon.padding_right=0 background.border_width=0 background.corner_radius=6 background.height=24 \
            --add bracket privacy microphone screenrec --set privacy background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
-           --add item seperator.r2 right --set seperator.r2 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
-
-sketchybar --add item wifi right --set wifi script="$PLUGIN_DIR/wifi.sh" update_freq=5 padding_left=2 padding_right=8 background.border_width=0 background.corner_radius=6 background.height=24 icon.highlight=on label.highlight=on --subscribe wifi wifi_change \
-           --add item volume right --set volume script="$PLUGIN_DIR/volume.sh" padding_left=4 padding_right=4 background.border_width=0 background.corner_radius=6 background.height=24 --subscribe volume volume_change \
-           --add item battery right --set battery script="$PLUGIN_DIR/battery.sh" update_freq=120 padding_left=8 padding_right=2 background.border_width=0 background.corner_radius=6 background.height=24 --subscribe battery system_woke power_source_change \
-           --add bracket status wifi volume battery --set status background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
            --add item seperator.r3 right --set seperator.r3 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
+# sketchybar --add item email right --set email script="$PLUGIN_DIR/email.sh" update_freq=5 label="0" label.color=$COLOR_DEFAULT icon.color=$COLOR_DEFAULT background.color=$COLOR_BACKGROUND icon=$ICON_MAIL padding_left=4 padding_right=8 icon.padding_left=8 icon.padding_right=0 background.border_width=0 background.corner_radius=6 background.height=24 \
+#            --add item discord right --set discord script="$PLUGIN_DIR/discord.sh" update_freq=5 label="0" label.color=$COLOR_DEFAULT icon.color=$COLOR_DEFAULT background.color=$COLOR_BACKGROUND icon=$ICON_DISCORD padding_left=4 padding_right=4 icon.padding_left=8 icon.padding_right=0 background.border_width=0 background.corner_radius=6 background.height=24 \
+#            --add item telegram right --set telegram script="$PLUGIN_DIR/telegram.sh" update_freq=5 label="0" label.color=$COLOR_DEFAULT icon.color=$COLOR_DEFAULT background.color=$COLOR_BACKGROUND icon=$ICON_TELEGRAM padding_left=4 padding_right=4 icon.padding_left=8 icon.padding_right=0 background.border_width=0 background.corner_radius=6 background.height=24 \
+#            --add item github right --set github script="$PLUGIN_DIR/github.sh" update_freq=1000 label="0" label.color=$COLOR_DEFAULT icon.color=$COLOR_DEFAULT background.color=$COLOR_BACKGROUND icon=$ICON_GIT padding_left=4 padding_right=4 icon.padding_left=8 icon.padding_right=0 background.border_width=0 background.corner_radius=6 background.height=24 \
+#            --add item message right --set message script="$PLUGIN_DIR/message.sh" update_freq=5 label="0" label.color=$COLOR_DEFAULT icon.color=$COLOR_DEFAULT background.color=$COLOR_BACKGROUND icon=$ICON_MESSAGE padding_left=8 padding_right=4 icon.padding_left=8 icon.padding_right=0 background.border_width=0 background.corner_radius=6 background.height=24 \
+#            --add bracket notif email github message --set notif background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
+#            --add item seperator.r4 right --set seperator.r4 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
+sketchybar --add item wifi right --set wifi script="$PLUGIN_DIR/wifi.sh" update_freq=5 padding_left=2 padding_right=8 background.border_width=0 background.corner_radius=6 background.height=24 icon.highlight=on label.highlight=on click_script="osascript -e 'tell application \"System Events\" to click menu bar item 3 of menu bar 1 of application process \"ControlCenter\"'" --subscribe wifi wifi_change \
+           --add item volume right --set volume script="$PLUGIN_DIR/volume.sh" padding_left=4 padding_right=4 background.border_width=0 background.corner_radius=6 background.height=24 click_script="osascript -e 'tell application \"System Events\" to click menu bar item 4 of menu bar 1 of application process \"ControlCenter\"'" --subscribe volume volume_change \
+           --add item battery right --set battery script="$PLUGIN_DIR/battery.sh" update_freq=120 padding_left=8 padding_right=2 background.border_width=0 background.corner_radius=6 background.height=24 click_script="osascript -e 'tell application \"System Events\" to click menu bar item 5 of menu bar 1 of application process \"ControlCenter\"'" --subscribe battery system_woke power_source_change \
+           --add bracket status wifi volume battery --set status background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
+           --add item seperator.r5 right --set seperator.r5 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
 
 sketchybar --hotload true
 sketchybar --update
+bottombar

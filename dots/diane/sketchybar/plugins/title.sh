@@ -3,7 +3,7 @@
 LABEL=$(yabai -m query --windows --window | jq -r '.app')
 
 if [[ $LABEL = "" ]]; then
-  LABEL="Finder"
+  LABEL="Desktop"
 fi
 
-sketchybar --set $NAME label=$LABEL
+sketchybar --set $NAME label="$LABEL"

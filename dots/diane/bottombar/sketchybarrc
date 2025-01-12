@@ -21,7 +21,7 @@ bottombar --add event window_change \
            --add event window_focus \
            --add event title_change
 
-bottombar --add item yabai_mode left --set yabai_mode padding_left=3 padding_right=10 update_freq=5 script="$PLUGIN_DIR/yabai.sh" click_script="$PLUGIN_DIR/yabai_click.sh" --subscribe yabai_mode mouse.clicked window_focus front_app_switched space_change title_change \
+bottombar --add item yabai_mode left --set yabai_mode padding_left=3 padding_right=10 update_freq=1 script="$PLUGIN_DIR/yabai.sh" click_script="$PLUGIN_DIR/yabai_click.sh" --subscribe yabai_mode mouse.clicked window_focus front_app_switched space_change title_change \
            --add bracket yabai yabai_mode --set yabai background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT
 bottombar --add item seperator.r1 left --set seperator.r1 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
 
@@ -30,29 +30,33 @@ bottombar --add item appmedia left \
 bottombar --add item media left --set media script="$PLUGIN_DIR/media.sh" updates=on --subscribe media media_change
 bottombar --add item seperator.r2 left --set seperator.r2 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
 
+bottombar --add item notif right --set notif icon.color=$COLOR_DEFAULT background.color=$COLOR_BACKGROUND icon=$ICON_NOTIF padding_left=6 padding_right=4 icon.padding_left=8 icon.padding_right=0 background.border_width=0 background.corner_radius=6 background.height=24 click_script="osascript -e 'tell application \"System Events\" to click menu bar item 1 of menu bar 1 of application process \"ControlCenter\"'" \
+          --add bracket control notif --set control background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
+          --add item seperator.r3 right --set seperator.r3 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+
 bottombar --add item time right --set time script="$PLUGIN_DIR/time.sh" update_freq=5 padding_left=2 padding_right=8 background.border_width=0 background.corner_radius=6 background.height=24 icon=$ICON_CLOCK \
            --add item date right --set date script="$PLUGIN_DIR/date.sh" update_freq=60 padding_left=8 padding_right=2 background.height=24 icon=$ICON_CALENDAR \
            --add bracket clock time date --set clock background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
-           --add item seperator.r3 right --set seperator.r3 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+           --add item seperator.r4 right --set seperator.r4 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
 
 bottombar --add item appcount right --set appcount script="$PLUGIN_DIR/app.sh" update_freq=5 padding_left=4 padding_right=8 background.border_width=0 background.corner_radius=6 background.height=24 icon=$ICON_PROCESS icon.highlight=on label.highlight=on \
           --add item portcount right --set portcount script="$PLUGIN_DIR/port.sh" update_freq=5 padding_left=4 padding_right=4 background.border_width=0 background.corner_radius=6 background.height=24 icon=$ICON_PORT icon.highlight=on label.highlight=on \
           --add item conncount right --set conncount script="$PLUGIN_DIR/connection.sh" update_freq=5 padding_left=8 padding_right=4 background.border_width=0 background.corner_radius=6 background.height=24 icon=$ICON_CONNECT icon.highlight=on label.highlight=on \
            --add bracket process appcount portcount conncount --set process background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
-           --add item seperator.r4 right --set seperator.r4 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+           --add item seperator.r5 right --set seperator.r5 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
 
 bottombar --add item ram right --set ram script="$PLUGIN_DIR/ram.sh" update_freq=5 padding_left=2 padding_right=8 background.border_width=0 background.corner_radius=6 background.height=24 \
            --add item cpu right --set cpu script="$PLUGIN_DIR/cpu.sh" update_freq=5 padding_left=4 padding_right=4 background.border_width=0 background.corner_radius=6 background.height=24 \
            --add item disk right --set disk script="$PLUGIN_DIR/disk.sh" update_freq=5 padding_left=8 padding_right=2 background.border_width=0 background.corner_radius=6 background.height=24 \
            --add bracket activity ram cpu disk --set activity background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
-           --add item seperator.r5 right --set seperator.r5 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+           --add item seperator.r6 right --set seperator.r6 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
 
-bottombar --add item pip right --set pip icon="󰌠 " label=" 0" script="$PLUGIN_DIR/update.sh" background.corner_radius=6 update_freq=60 padding_left=4 padding_right=8 background.border_width=0 background.height=24 \
+bottombar --add item pip right --set pip icon="󰌠 " label=" 0" script="$PLUGIN_DIR/update.sh" background.corner_radius=6 update_freq=1000 padding_left=4 padding_right=8 background.border_width=0 background.height=24 \
            --add item brew right --set brew icon="􀐛 " label=" 0" background.corner_radius=6 padding_left=4 padding_right=4 background.border_width=0 background.height=24 \
            --add item npm right --set npm icon="󰌞 " label=" 0" background.corner_radius=6 padding_left=4 padding_right=4 background.border_width=0 background.height=24 \
            --add item gem right --set gem icon="󰴭 " label=" 0" background.corner_radius=6 padding_left=8 padding_right=4 background.border_width=0 background.height=24 \
            --add bracket updates pip brew npm gem --set updates background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
-           --add item seperator.r6 right --set seperator.r6 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
+           --add item seperator.r7 right --set seperator.r7 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
 
 bottombar --hotload true
 bottombar --update
