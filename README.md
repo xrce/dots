@@ -38,3 +38,15 @@
 |``` cpu ```| colors for each usage level |
 |``` ram ```| colors for each usage level |
 |``` network ```| green for hotspot, blue for wifi, cyan for private, white disconnected |
+
+| ```> geisha <``` | [```mv dots/geisha ~/.config/```](./dots/geisha/) |
+| :-: | :-: |
+| **desktop** | **apps** |
+| ![kuujaku.](pics/geisha/geisha1.png "desktop") | ![kuujaku.](pics/geisha/geisha2.png "apps") |
+
+| Sketchybar | |
+| - | - |
+| [```Top bar```](./dots/geisha/sketchybar/) | **left:** apple menu, spaces |
+| | **center:** app icon, ```app title```, layout |
+| | **right:** battery, volume, network, clock, control centre |
+|```app title```| supposed to run under notch |
