@@ -14,7 +14,8 @@ export ICON_LOCK=󰌾
 export ICON_APPLE=􀣺
 export ICON_CONTROL=󰍜
 export ICON_NOTIF=󰎟
-export ICONS_SPACE=(一 二 三 四 五 六 七 八 九 十)
+export ICONS_SPACE=(󰬺 󰬻 󰬼 󰬽 󰬾 󰬿 󰭀 󰭁 󰭂)
+export ICONS_SPACE_JP=(一 二 三 四 五 六 七 八 九 十)
 
 export ICON_APP=󰣆 # fallback app
 export ICON_TERM=󰆍 # fallback terminal app, terminal, warp, iterm2

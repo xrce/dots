@@ -2,7 +2,7 @@ source "$HOME/.config/colors.sh"
 source "$HOME/.config/icons.sh"
 
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
-sketchybar --bar color=0x00000000 height=40 margin=0 y_offset=3 padding_left=8 padding_right=8 sticky=on
+sketchybar --bar color=0x00000000 height=40 margin=0 y_offset=3 padding_left=8 padding_right=8 sticky=on topmost=window
 sketchybar --default padding_left=8 padding_right=5                    \
                      background.border_color=$COLOR_DEFAULT             \
                      background.border_width=2                         \

@@ -25,8 +25,8 @@ sketchybar --add item apple left --set apple background.border_width=0 backgroun
            --add bracket button apple --set button background.color=$COLOR_BACKGROUND background.border_color=$COLOR_DEFAULT \
            --add item sep.l1 left --set sep.l1 padding_left=4 padding_right=4 background.drawing=off icon.drawing=off label.drawing=off
 
-LENGTH=${#ICONS_SPACE[@]}
-for i in "${!ICONS_SPACE[@]}"
+LENGTH=${#ICONS_SPACE_JP[@]}
+for i in "${!ICONS_SPACE_JP[@]}"
 do
   sid=$((i+1))
   PAD_LEFT=2
@@ -36,7 +36,7 @@ do
   elif [[ $i == $((LENGTH-1)) ]]; then
     PAD_RIGHT=8
   fi
-  sketchybar --add space space.$sid left --set space.$sid script="$PLUGIN_DIR/app_space.sh" associated_space=$sid padding_left=$PAD_LEFT padding_right=$PAD_RIGHT background.color=$COLOR_DEFAULT background.border_width=0 background.corner_radius=6 background.height=24 icon="${ICONS_SPACE[$i]}" --subscribe space.$sid front_app_switched window_change
+  sketchybar --add space space.$sid left --set space.$sid script="$PLUGIN_DIR/app_space.sh" associated_space=$sid padding_left=$PAD_LEFT padding_right=$PAD_RIGHT background.color=$COLOR_DEFAULT background.border_width=0 background.corner_radius=6 background.height=24 icon="${ICONS_SPACE_JP[$i]}" --subscribe space.$sid front_app_switched window_change
 done
 sketchybar --add bracket spaces '/space\..*/' --set spaces background.color=$COLOR_BACKGROUND
 
