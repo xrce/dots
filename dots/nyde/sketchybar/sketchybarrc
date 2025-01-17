@@ -1,0 +1,38 @@
+source "$HOME/.config/colors.sh"
+source "$HOME/.config/icons.sh"
+
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+sketchybar --bar color=0x00000000 notch_width=300 height=40 margin=40 y_offset=3 padding_left=8 padding_right=8 sticky=on topmost=window
+sketchybar --default padding_left=8 padding_right=5                    \
+                     background.border_color=$COLOR_DEFAULT             \
+                     background.border_width=2                         \
+                     background.height=40                              \
+                     icon.color=$COLOR_DEFAULT                          \
+                     icon.highlight_color=$COLOR_BACKGROUND            \
+                     icon.padding_left=6 icon.padding_right=2          \
+                     icon.font="Nerd Font:Regular:16.0"                \
+                     label.color=$COLOR_DEFAULT                         \
+                     label.highlight_color=$COLOR_BACKGROUND           \
+                     label.padding_left=2 label.padding_right=6        \
+                     label.font="Nerd Font:Bold:12.0"
+
+sketchybar --add event window_change \
+           --add event window_focus \
+           --add event title_change
+
+sketchybar --add item left_anchor left --set left_anchor width=0 \
+           --add item q_anchor q --set q_anchor width=0 \
+           --add item e_anchor e --set e_anchor width=0 \
+           --add item right_anchor right --set right_anchor width=0 \
+           --add bracket left_bar left_anchor q_anchor \
+           --set left_bar background.color=$COLOR_BACKGROUND \
+           --add bracket right_bar e_anchor right_anchor \
+           --set right_bar background.color=$COLOR_BACKGROUND
+
+sketchybar --add item logo left --set logo script="$PLUGIN_DIR/logo.sh" background.border_width=0 background.height=24 icon=$ICON_FILE click_script="./bin/menus -s 1" --subscribe logo mouse.clicked window_focus front_app_switched space_change title_change
+sketchybar --add item yabai_mode q --set yabai_mode padding_left=3 padding_right=10 update_freq=5 script="$PLUGIN_DIR/yabai.sh" click_script="$PLUGIN_DIR/yabai_click.sh" --subscribe yabai_mode mouse.clicked window_focus front_app_switched space_change title_change
+sketchybar --add item title q --set title script="$PLUGIN_DIR/title.sh" padding_left=2 padding_right=8 background.border_width=0 background.height=24 --subscribe title window_focus front_app_switched space_change title_change
+
+sketchybar --add item wifi e --set wifi script="$PLUGIN_DIR/wifi.sh" update_freq=5 padding_left=8 padding_right=8 background.border_width=0 background.corner_radius=6 background.height=24 --subscribe wifi wifi_change
+sketchybar --add item time e --set time script="$PLUGIN_DIR/time.sh" update_freq=5 padding_left=245 padding_right=245 background.border_width=0 background.corner_radius=6 background.height=24
+sketchybar --add item battery e --set battery script="$PLUGIN_DIR/battery.sh" update_freq=120 padding_left=8 padding_right=8 background.border_width=0 background.corner_radius=6 background.height=24 --subscribe battery system_woke power_source_change
