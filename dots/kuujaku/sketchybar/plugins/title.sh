@@ -6,4 +6,4 @@ if [[ $LABEL = "" ]]; then
   LABEL="Finder"
 fi
 
-sketchybar --set $NAME label=$LABEL
+sketchybar --set $NAME label="$LABEL"

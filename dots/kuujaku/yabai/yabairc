@@ -32,8 +32,8 @@ yabai -m config \
 	split_ratio 0.50 \
 	split_type auto \
 	auto_balance on \
-	top_padding 10 \
-	bottom_padding 10 \
+	top_padding 0 \
+	bottom_padding 60 \
 	left_padding 10 \
 	right_padding 10 \
 	window_gap 10 \
@@ -49,6 +49,6 @@ yabai -m signal --add event=window_created action="sketchybar -m --trigger windo
 yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
 
 echo "yabai configuration loaded.."
-borders active_color=0xffdddddd inactive_color=0xe01d2021 width=6.0 style=round
+borders active_color=$COLOR_DEFAULT inactive_color=$COLOR_BLACK_BRIGHT width=5.0 style=round
 yabai -m signal --add event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
 yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null" &
