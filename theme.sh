@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_DIR="/Users/xrce/.config"
+CONFIG_DIR="$HOME/.config"
 DOTS_DIR="$CONFIG_DIR/dots"
 
 [ -d "$DOTS_DIR/$1" ] || { echo "'$1' dots not found"; exit 1; }
