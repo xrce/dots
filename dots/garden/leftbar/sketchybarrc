@@ -1,0 +1,45 @@
+source "$HOME/.config/colors.sh"
+source "$HOME/.config/icons.sh"
+
+PLUGIN_DIR="$HOME/.config/leftbar/plugins"
+leftbar --bar color=$COLOR_BACKGROUND border_width=2 border_color=$COLOR_DEFAULT height=50 margin=12 y_offset=10 sticky=on position=left corner_radius=10
+leftbar --default padding_left=10 padding_right=10                    \
+                     background.border_color=$COLOR_DEFAULT             \
+                     background.border_width=2                         \
+                     background.height=40                              \
+                     background.corner_radius=12                       \
+                     icon.color=$COLOR_DEFAULT                          \
+                     icon.highlight_color=$COLOR_BACKGROUND            \
+                     icon.padding_left=10 icon.padding_right=1          \
+                     icon.font="Nerd Font:Regular:18.0"                \
+                     label.color=$COLOR_DEFAULT                         \
+                     label.highlight_color=$COLOR_BACKGROUND           \
+                     label.padding_left=1 label.padding_right=8        \
+                     label.font="Nerd Font:Bold:12.0"
+
+leftbar --add event window_change \
+           --add event window_focus \
+           --add event title_change
+
+leftbar --add item logo left --set logo script="$PLUGIN_DIR/logo.sh" icon=$ICON_FILE click_script="./bin/menus -s 1" icon.padding_left=14 padding_left=0 --subscribe logo mouse.clicked window_focus front_app_switched space_change title_change
+
+LENGTH=${#ICONS_SPACE_CIRCLE[@]}
+for i in "${!ICONS_SPACE_CIRCLE[@]}"
+do
+  sid=$((i+1))
+  PAD_LEFT=2
+  PAD_RIGHT=8
+  if [[ $i == 0 ]]; then
+    PAD_LEFT=8
+  elif [[ $i == $((LENGTH-1)) ]]; then
+    PAD_RIGHT=8
+  fi
+  leftbar --add space space.$sid center --set space.$sid script="$PLUGIN_DIR/app_space.sh" associated_space=$sid padding_left=$PAD_LEFT padding_right=$PAD_RIGHT background.color=$COLOR_DEFAULT background.border_width=0 background.corner_radius=6 background.height=24 icon="${ICONS_SPACE_CIRCLE[$i]}" --subscribe space.$sid front_app_switched window_change
+done
+
+leftbar --add item wifi right --set wifi script="$PLUGIN_DIR/wifi.sh" update_freq=5 --subscribe wifi wifi_change \
+           --add item volume right --set volume script="$PLUGIN_DIR/volume.sh" --subscribe volume volume_change \
+           --add item battery right --set battery script="$PLUGIN_DIR/battery.sh" update_freq=120 --subscribe battery system_woke power_source_change
+
+leftbar --hotload true
+leftbar --update

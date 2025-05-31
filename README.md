@@ -22,7 +22,7 @@
 | **desktop** | **description** |
 | ![:nyde](pics/nyde/nyde.png "desktop") | Extremely minimal, focused setup, only showing relevant items to improves productivity |
 
-| ```alcove``` | [```mv dots/alcove ~/.config/```](./dots/alcove/) |
+| ```garden^``` | [```mv dots/garden ~/.config/```](./dots/garden/) |
 | :-: | :-: |
 | **desktop** | **description** |
-| ![alcove](pics/alcove/alcove.png "desktop") | Clean setup inspired by [alcove](https://tryalcove.com/) site|
+| ![alcove](pics/garden/garden.png "desktop") | Comfy retroish setup with hidden notch |

@@ -1,0 +1,36 @@
+source "$HOME/.config/colors.sh"
+source "$HOME/.config/icons.sh"
+
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+sketchybar --bar color=0xff000000 border_width=0 border_color=$COLOR_DEFAULT height=40 sticky=on position=top topmost=window
+sketchybar --default padding_left=10 padding_right=10                    \
+                     background.border_color=$COLOR_DEFAULT             \
+                     background.border_width=2                         \
+                     background.height=40                              \
+                     background.corner_radius=12                       \
+                     icon.color=$COLOR_DEFAULT                          \
+                     icon.highlight_color=$COLOR_BACKGROUND            \
+                     icon.padding_left=10 icon.padding_right=1          \
+                     icon.font="Nerd Font:Regular:18.0"                \
+                     label.color=$COLOR_DEFAULT                         \
+                     label.highlight_color=$COLOR_BACKGROUND           \
+                     label.padding_left=1 label.padding_right=8        \
+                     label.font="Press Start 2P:Regular:12.0"
+
+sketchybar --add event window_change \
+           --add event window_focus \
+           --add event title_change
+
+sketchybar --add item title left --set title script="$PLUGIN_DIR/title.sh" icon="􀁍" icon.padding_left=0 icon.padding_right=0 label.padding_left=30 padding_left=6 background.border_width=0 background.height=24 --subscribe title window_focus front_app_switched space_change title_change
+
+sketchybar --add item date right --set date script="$PLUGIN_DIR/date.sh" update_freq=60 background.height=24 icon="􀩆" icon.padding_left=0 label.padding_right=0 label.padding_left=20
+sketchybar --add item time right --set time script="$PLUGIN_DIR/time.sh" update_freq=5 background.height=24 icon="􀩇" icon.padding_left=0 label.padding_right=0 label.padding_left=20
+
+sketchybar --add item wifi right --set wifi script="$PLUGIN_DIR/wifi.sh" update_freq=5 background.height=24 icon="􀩅" icon.padding_left=0 label.padding_right=0 label.padding_left=20 --subscribe wifi wifi_change \
+sketchybar --add item yabai_mode right --set yabai_mode padding_left=6 icon.padding_left=0 update_freq=5 script="$PLUGIN_DIR/yabai.sh" click_script="$PLUGIN_DIR/yabai_click.sh" --subscribe yabai_mode mouse.clicked window_focus front_app_switched space_change title_change
+
+sketchybar --add item yabai_mode left --set yabai_mode padding_left=3 padding_right=10 update_freq=5 script="$PLUGIN_DIR/yabai.sh" click_script="$PLUGIN_DIR/yabai_click.sh" icon="􀩄" icon.padding_left=0 label.padding_right=0 label.padding_left=20 --subscribe yabai_mode mouse.clicked window_focus front_app_switched space_change title_change
+
+leftbar
+sketchybar --hotload true
+sketchybar --update

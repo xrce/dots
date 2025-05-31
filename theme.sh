@@ -7,8 +7,9 @@ DOTS_DIR="$CONFIG_DIR/dots"
 
 pkill "sketchybar"
 pkill "bottombar"
+pkill "leftbar"
 
-rm -rf $CONFIG_DIR/{sketchybar,bottombar,yabai}
+rm -rf $CONFIG_DIR/{sketchybar,bottombar,leftbar,yabai}
 cp -r $DOTS_DIR/$1/* $CONFIG_DIR/
 
 yabai --restart-service
